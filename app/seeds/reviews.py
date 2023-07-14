@@ -83,7 +83,7 @@ def seed_review():
         user_id=3,
         item_id=12,
         star=4,
-        eview="Pretty good. Met my requirements."
+        review="Pretty good. Met my requirements."
     )
 
     review_12 = Review(
