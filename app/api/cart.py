@@ -12,17 +12,26 @@ def get_shoppingcart():
     carts = Cart.query.filter_by(user_id=userId).all()
     return {'cart': [cart.to_dict() for cart in carts]}
 
-@cart_routes.route('/items/<int:itemId>', methods=['POST'])
+@cart_routes.route('/add-to-cart', methods=['POST'])
 @login_required
-def add_to_cart(itemId, total):
-    userId = session.get('_user_id')
+def add_to_cart():
+    user_id = session.get('_user_id')
 
-    cart_item = Cart.query.filter_by(item_id=itemId, user_id=userId).first()
+    data = request.json
+
+    # Extract required fields from the request body
+    item_id = data.get('item_id')
+    quantity = data.get('quantity')
+
+    if not item_id or not quantity:
+        return jsonify({"error": "Missing required fields 'item_id' or 'quantity'."}), 400
+
+    cart_item = Cart.query.filter_by(item_id=item_id, user_id=user_id).first()
 
     if cart_item:
         return jsonify({"error": "Item already exists in the cart."}), 400
 
-    new_item = Cart(user_id=userId, item_id=itemId, quantity=total)
+    new_item = Cart(user_id=user_id, item_id=item_id, quantity=quantity)
 
     try:
         db.session.add(new_item)

@@ -5,7 +5,7 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 from app.api.aws_helpers import ALLOWED_EXTENSIONS
 
 class CreateItem(FlaskForm):
-    user_Id = IntegerField('User Id', validators=[DataRequired()])
+    user_id = IntegerField('User Id', validators=[DataRequired()])
     name = StringField('name', validators=[DataRequired()])
     price = FloatField('price', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])
