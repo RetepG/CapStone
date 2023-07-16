@@ -12,23 +12,58 @@ def get_shoppingcart():
     carts = Cart.query.filter_by(user_id=userId).all()
     return {'cart': [cart.to_dict() for cart in carts]}
 
+# @cart_routes.route('/add-to-cart', methods=['POST'])
+# @login_required
+# def add_to_cart():
+#     print("Inside add_to_cart function")  # This print statement
+#     user_id = session.get('_user_id')
+
+#     data = request.json
+
+#     # Extract required fields from the request body
+#     item_id = data.get('item_id')
+#     quantity = data.get('quantity')
+
+#     if not item_id or not quantity:
+#         return jsonify({"error": "Missing required fields 'item_id' or 'quantity'."}), 400
+
+#     cart_item = Cart.query.filter_by(item_id=item_id, user_id=user_id).first()
+
+#     if cart_item:
+#         return jsonify({"error": "Item already exists in the cart."}), 400
+
+#     new_item = Cart(user_id=user_id, item_id=item_id, quantity=quantity)
+
+#     try:
+#         db.session.add(new_item)
+#         db.session.commit()
+#         return jsonify(new_item.to_dict()), 200
+#     except Exception as e:
+#         return jsonify({"error": "An error occurred while adding the item to the cart."}), 500
 @cart_routes.route('/add-to-cart', methods=['POST'])
 @login_required
 def add_to_cart():
+    print("Inside add_to_cart function")
     user_id = session.get('_user_id')
+    print(f"User ID: {user_id}")
 
     data = request.json
+    print(f"Request data: {data}")
 
     # Extract required fields from the request body
     item_id = data.get('item_id')
     quantity = data.get('quantity')
 
     if not item_id or not quantity:
+        print("Missing 'item_id' or 'quantity'")
         return jsonify({"error": "Missing required fields 'item_id' or 'quantity'."}), 400
+
+    print(f"Adding item with id: {item_id}, quantity: {quantity}")
 
     cart_item = Cart.query.filter_by(item_id=item_id, user_id=user_id).first()
 
     if cart_item:
+        print("Item already exists in the cart")
         return jsonify({"error": "Item already exists in the cart."}), 400
 
     new_item = Cart(user_id=user_id, item_id=item_id, quantity=quantity)
@@ -36,9 +71,12 @@ def add_to_cart():
     try:
         db.session.add(new_item)
         db.session.commit()
+        print("Item added to cart successfully")
         return jsonify(new_item.to_dict()), 200
     except Exception as e:
+        print(f"Exception while adding item to cart: {e}")
         return jsonify({"error": "An error occurred while adding the item to the cart."}), 500
+
 
 # Changes the amount of quantity for item
 @cart_routes.route('/items/<int:itemId>', methods=['PUT'])
