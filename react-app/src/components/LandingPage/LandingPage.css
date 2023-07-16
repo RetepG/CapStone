@@ -1,0 +1,61 @@
+.Greeting {
+    text-align: center;
+}
+
+.Landing-Page-Container {
+    text-align: center;
+}
+
+.Featured-Items-Container {
+    background-color: lightblue;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.Featured-Title {
+    margin-bottom: 10px;
+}
+
+.Featured-Items-List {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.Featured-Items-List li {
+    width: 20%;
+    margin-bottom: 20px;
+}
+
+.All-Items-List {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* Set 5 columns */
+    grid-gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.All-Items-List li {
+    margin-bottom: 20px;
+    background-color: #e6e6e6;
+}
+
+.All-Items-List li a {
+    text-decoration: none;
+}
+
+.mainpic {
+    width: 20rem;
+    height: 20rem;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.price {
+    margin-top: 5px;
+    font-weight: bold;
+}
