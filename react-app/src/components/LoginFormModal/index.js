@@ -3,6 +3,8 @@ import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
+import { Redirect, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -10,6 +12,10 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
+  const sessionUser = useSelector((state) => state.session.user);
+  const history = useHistory();
+
+  if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,12 +23,21 @@ function LoginFormModal() {
     if (data) {
       setErrors(data);
     } else {
-        closeModal()
+      closeModal();
     }
   };
 
+  const demo = async (e) => {
+    e.preventDefault();
+    const email = "demo@aa.io";
+    const password = "password";
+    await dispatch(login(email, password));
+    closeModal(); // Close modal after demo login
+    history.push("/");
+  };
+
   return (
-    <>
+    <div className="login-form-modal">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <ul>
@@ -30,27 +45,30 @@ function LoginFormModal() {
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <label>
-          Email
+        <div className="form-field">
+          <label>Email</label>
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Password
+        </div>
+        <div className="form-field">
+          <label>Password</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        <button type="submit">Log In</button>
+        </div>
+        <div className="form-actions">
+          <button type="submit">Log In</button>
+          <button onClick={demo}>Demo User</button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 
