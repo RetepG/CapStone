@@ -81,7 +81,8 @@ const itemReducer = (state = initalState, action) => {
             return newState;
         case CREATE_ITEM:
             newState = { ...state };
-            newState.itemId[action.item.id] = action.item;
+            // newState.itemId[action.item.id] = action.item;
+            newState.items[action.item.id] = action.item;
             return newState;
         case DELETE_ITEM:
             newState = { ...state };
