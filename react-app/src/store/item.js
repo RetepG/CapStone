@@ -32,7 +32,7 @@ export const getItemIdThunk = (id) => async (dispatch) => {
     if (res.ok) {
         const item = await res.json()
         await dispatch(getItemId(item))
-        // return item
+        return item
     }
 }
 
@@ -59,34 +59,6 @@ export const deleteItemThunk = (id) => async (dispatch) => {
     }
 }
 
-// const initalState = { items: {}, itemId: {}}
-// const itemReducer = (state = initalState, action) => {
-//     let newState;
-//     switch(action.type){
-//         case GET_ALL_ITEMS:
-//             newState = {...state}
-//             action.items.forEach(item => { newState.items[item.id] = item})
-//             return newState
-//         case GET_ITEM_ID:
-//             newState = {...state}
-//             newState.itemId[action.item.id] = action.item;
-//             return newState
-//         case CREATE_ITEM:
-//             newState = {...state}
-//             newState.itemId[action.item.id] = action.item
-//             return newState
-//         case DELETE_ITEM:
-//             newState = {...state}
-//             delete newState.itemId[action.id]
-//             delete newState.itemId[action.id]
-//             return newState
-//         default:
-//             return state
-//     }
-// }
-
-// export default itemReducer
-
 const initalState = { items: {}, itemId: {} };
 
 const itemReducer = (state = initalState, action) => {
@@ -101,8 +73,11 @@ const itemReducer = (state = initalState, action) => {
             }
             return newState;
         case GET_ITEM_ID:
+            // newState = { ...state };
+            // newState.itemId[action.item.id] = action.item;
+            // return newState;
             newState = { ...state };
-            newState.itemId[action.item.id] = action.item;
+            newState.items[action.item.id] = action.item;
             return newState;
         case CREATE_ITEM:
             newState = { ...state };
