@@ -48,7 +48,7 @@ function LandingPage() {
                                 <li key={item.id}>
                                     <NavLink className="Redirect_ItemId" to={`/items/${item.id}`}>
                                         <img className="mainpic" src={item.mainimage} alt={item.name} />
-                                        <p className="price">${item.price.toFixed(2)}</p>
+                                        <p className="price-landing">${item.price.toFixed(2)}</p>
                                         {item.name}
                                     </NavLink>
                                 </li>
@@ -67,7 +67,7 @@ function LandingPage() {
                                     <li key={item.id}>
                                         <NavLink className="Redirect_ItemId" to={`/items/${item.id}`}>
                                             <img className="mainpic" src={item.mainimage} alt={item.name} />
-                                            <p className="price">${item.price.toFixed(2)}</p>
+                                            <p className="price-landing">${item.price.toFixed(2)}</p>
                                             {item.name}
                                         </NavLink>
                                     </li>

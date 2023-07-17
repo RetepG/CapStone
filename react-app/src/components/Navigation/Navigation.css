@@ -1,7 +1,29 @@
-.profile-dropdown {
+.hidden {
+  display: none;
   position: absolute;
 }
 
-.hidden {
-  display: none;
+.Home {
+  font-size: 2rem;
+  margin-left: 1rem;
+  text-decoration: none;
+  color: blue;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+}
+
+.Nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: solid #ddd 2px;
+  height: 3.5rem;
+  width: 100%;
+  list-style: none;
+}
+
+.Logo {
+  padding-top: 0.2rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  margin-left: 20rem;
 }
