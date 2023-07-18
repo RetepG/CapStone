@@ -1,43 +1,55 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
 import { createItemThunk } from "../../store/item";
-
-const imageUploadState = {
-    mainimage: null,
-    sideimage: null,
-    sideimage2: null,
-    sideimage3: null,
-};
+import { useHistory } from "react-router-dom";
 
 function CreateItem() {
-    const currentUser = useSelector((state) => state.session.user);
-    const dispatch = useDispatch();
+    const currentUser = useSelector(state => state.session.user);
     const history = useHistory();
+    const dispatch = useDispatch();
 
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState(0);
-    const [description, setDescription] = useState("");
-    const [imgUpload, setImgUpload] = useState(imageUploadState);
-    const [errors, setErrors] = useState([]);
+    const [formValues, setFormValues] = useState({
+        name: '',
+        price: 0,
+        description: '',
+        mainimage: null,
+        sideimage: null,
+        sideimage2: null,
+        sideimage3: null,
+        upload1: "No file uploaded",
+        upload2: "No file uploaded",
+        upload3: "No file uploaded",
+        upload4: "No file uploaded",
+    });
 
-    const handleAddImage = (e, imageKey) => {
-        const file = e.target.files[0];
-        setImgUpload((prevState) => ({
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState({});
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormValues(prevState => ({
             ...prevState,
-            [imageKey]: file,
+            [name]: value
         }));
     };
 
-    const handleImgSubmission = async (e) => {
+    const handleAddImage = (name, e) => {
+        const file = e.target.files[0];
+        setFormValues(prevState => ({
+            ...prevState,
+            [name]: file,
+            [name.replace('image', 'fileUpload')]: file ? file.name : "No file uploaded"
+        }));
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!currentUser) {
-            setErrors(["Sign In to continue"]);
-            return;
-        }
+
+        const { name, price, description, mainimage, sideimage, sideimage2, sideimage3 } = formValues;
 
         const errorObj = {};
-        if (name.length === 0) {
+
+        if (name.trim().length === 0) {
             errorObj.name = "Name is required";
         } else if (name.length < 2 || name.length > 30) {
             errorObj.name = "Name must be between 2 and 30 characters";
@@ -48,120 +60,157 @@ function CreateItem() {
             errorObj.price = "Price must be a positive number";
         }
 
-        if (description.length === 0) {
+        if (description.trim().length === 0) {
             errorObj.description = "Description is required";
         } else if (description.length > 150) {
             errorObj.description = "Description must be at most 150 characters";
         }
 
-        const imageKeys = Object.keys(imgUpload);
-        let counter = 0;
-        for (const key of imageKeys) {
-            if (imgUpload[key]) {
-                counter++;
-            }
-        }
-        if (counter < 4) {
-            errorObj.image = "Must upload at least 4 images minimum.";
+        if (!mainimage) {
+            errorObj.mainimage = "Main image is required";
         }
 
-        setErrors(errorObj);
+        if (!sideimage) {
+            errorObj.sideimage = "Side image is required";
+        }
+
+        if (!sideimage2) {
+            errorObj.sideimage2 = "Side image 2 is required";
+        }
+
+        if (!sideimage3) {
+            errorObj.sideimage3 = "Side image 3 is required";
+        }
+
         if (Object.keys(errorObj).length > 0) {
+            setError(errorObj);
             return;
         }
 
-        const formData = new FormData();
-        formData.append("name", name);
-        formData.append("price", parsedPrice.toFixed(2).toString());
-        formData.append("description", description);
-        formData.append("user_id", currentUser.id);
-        imageKeys.forEach((key) => {
-            const file = imgUpload[key];
-            if (file) {
-                formData.append(key, file);
-            }
-        });
+        if (!currentUser) {
+            return <h1>Please sign in</h1>;
+        }
 
-        dispatch(createItemThunk(formData))
-            .then(() => {
-                history.push("/");
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        setIsLoading(true);
+
+        const formData = new FormData();
+        formData.append("user_id", currentUser.id);
+        for (const key in formValues) {
+            if (key === "upload1" || key === "upload2" || key === "upload3" || key === "upload4") {
+                continue;
+            }
+            formData.append(key, formValues[key]);
+        }
+
+        await dispatch(createItemThunk(formData));
+
+        setIsLoading(false);
+        history.push("/");
     };
 
     return (
-        <div className="create-container">
-            <form
-                className="Create-listing-form"
-                encType="multipart/form-data"
-                onSubmit={handleImgSubmission}
-                method="POST"
-            >
-                <div>
-                    <h1>Create Listing</h1>
-                    <label>
-                        Name
-                        <input
-                            className="create-name"
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                    </label>
-                    {errors.name && <p className="errors">{errors.name}</p>}
-                    <label>
-                        Price
-                        <input
-                            className="create-price"
-                            type="number"
-                            value={price}
-                            onChange={(e) => setPrice(e.target.value)}
-                        />
-                    </label>
-                    {errors.price && <p className="errors">{errors.price}</p>}
-                    <label>
-                        Description
-                        <textarea
-                            className="create-text"
-                            type="text"
-                            rows={15}
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
-                    </label>
-                    {errors.description && (
-                        <p className="errors">{errors.description}</p>
-                    )}
-                    <div className="img-upload-container">
-                        {Array.from({ length: 4 }, (_, index) => index + 1).map((num) => (
-                            <div className="img_upload_test" key={num}>
-                                <div>
-                                    {num === 1 ? "Main" : `Side ${num - 1}`} Image
-                                </div>
-                                <div className="imgInputAndFileStatus">
-                                    <input
-                                        className="upload-img"
-                                        type="file"
-                                        name={`item_img${num}`}
-                                        accept="image/*"
-                                        onChange={(e) =>
-                                            handleAddImage(e, `item_img${num}`)
-                                        }
-                                    />
-                                    <div className="fileStatus">
-                                        {imgUpload[`item_img${num}`]
-                                            ? imgUpload[`item_img${num}`].name
-                                            : "No file uploaded"}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                        <div className="submit_button">
-                            <button type="submit">Submit</button>
+        <div className="create-item-container">
+            <form id="create-item-form" encType="multipart/form-data" onSubmit={handleSubmit} method="POST">
+                <h1>Create Listing</h1>
+                <label>
+                    Name
+                    <input
+                        className="item_name"
+                        type="text"
+                        name="name"
+                        value={formValues.name}
+                        placeholder="Name"
+                        onChange={handleChange}
+                    />
+                    {error.name && <p className="error-message">{error.name}</p>}
+                </label>
+                <label>
+                    Price
+                    <input
+                        className="item_price"
+                        type="number"
+                        name="price"
+                        value={formValues.price}
+                        placeholder="Price"
+                        onChange={handleChange}
+                    />
+                    {error.price && <p className="error-message">{error.price}</p>}
+                </label>
+                <label>
+                    <div>Description</div>
+                    <textarea
+                        rows={10}
+                        className="item_description"
+                        type="text"
+                        name="description"
+                        value={formValues.description}
+                        placeholder="Item Description"
+                        onChange={handleChange}
+                    />
+                    {error.description && <p className="error-message">{error.description}</p>}
+                </label>
+                <div className="img_upload_area">
+                    <div className="img_upload_test">
+                        Main Image
+                        <div className="file-input-upload">
+                            <input
+                                className="main-img-create"
+                                type="file"
+                                name="mainimage"
+                                accept="image/*"
+                                onChange={(e) => handleAddImage("mainimage", e)}
+                            ></input>
+                            <div className="uploaded">{formValues.upload1}</div>
+                        </div>
+                        {error.mainimage && <p className="error-message">{error.mainimage}</p>}
+                    </div>
+                    <div className="img_upload_test">
+                        Side Image
+                        <div className="file-input-upload">
+                            <input
+                                className="side_img_create"
+                                type="file"
+                                name="sideimage"
+                                accept="image/*"
+                                onChange={(e) => handleAddImage("sideimage", e)}
+                            ></input>
+                            <div className="uploaded">{formValues.upload2}</div>
+                            {error.sideimage && <p className="error-message">{error.sideimage}</p>}
                         </div>
                     </div>
+                    <div className="img_upload_test">
+                        Side Image 2
+                        <div className="file-input-upload">
+                            <input
+                                className="side_img_create"
+                                type="file"
+                                name="sideimage2"
+                                accept="image/*"
+                                onChange={(e) => handleAddImage("sideimage2", e)}
+                            ></input>
+                            <div className="uploaded">{formValues.upload3}</div>
+                            {error.sideimage2 && <p className="error-message">{error.sideimage2}</p>}
+                        </div>
+                    </div>
+                    <div className="img_upload_test">
+                        Side Image 3
+                        <div className="file-input-upload">
+                            <input
+                                className="side_img_create"
+                                type="file"
+                                name="sideimage3"
+                                accept="image/*"
+                                onChange={(e) => handleAddImage("sideimage3", e)}
+                            ></input>
+                            <div className="uploaded">{formValues.upload4}</div>
+                            {error.sideimage3 && <p className="error-message">{error.sideimage3}</p>}
+                        </div>
+                    </div>
+                </div>
+                <div className="submit_button-create-item">
+                    <button type="submit" disabled={isLoading}>
+                        {isLoading ? "Submitting..." : "Submit"}
+                    </button>
                 </div>
             </form>
         </div>
