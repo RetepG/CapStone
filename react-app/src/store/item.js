@@ -76,6 +76,7 @@ const itemReducer = (state = initalState, action) => {
             // newState = { ...state };
             // newState.itemId[action.item.id] = action.item;
             // return newState;
+
             newState = { ...state };
             newState.items[action.item.id] = action.item;
             return newState;

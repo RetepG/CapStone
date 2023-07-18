@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage"
 import ItemDetails from "./components/ItemById";
 import CreateItem from "./components/CreateItem";
+import UpdateItem from "./components/UpdateItems";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/items/new">
             <CreateItem />
+          </Route>
+          <Route path="/items/:itemId/update">
+            <UpdateItem />
           </Route>
           <Route path="/items/:itemId">
             <ItemDetails />
