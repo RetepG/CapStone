@@ -1,8 +1,9 @@
 from flask import Blueprint, jsonify, redirect, request
 from app.models import Item, db
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.api.aws_helpers import get_unique_filename, upload_file_to_s3
 from app.forms import CreateItem
+import logging
 
 item_routes = Blueprint('item', __name__)
 
@@ -30,14 +31,17 @@ def create_item():
         uploads = []
 
         for image_name in images:
-            item_image = form.data[image_name]
-            item_image.filename = get_unique_filename(item_image.filename)
-            upload = upload_file_to_s3(item_image)
+            item_image = form.data.get(image_name)  # Use get() method to avoid KeyErrors
+            if item_image:
+                item_image.filename = get_unique_filename(item_image.filename)
+                upload = upload_file_to_s3(item_image)
 
-            if 'url' not in upload:
-                return upload['errors']
+                if 'url' not in upload:
+                    return jsonify({'error': 'Failed to upload image'}), 400
 
-            uploads.append(upload['url'])
+                uploads.append(upload['url'])
+            else:
+                uploads.append(None)  # Provide a default value for empty image fields
 
         new_item = Item(
             user_id=form.data['user_id'],
@@ -55,7 +59,14 @@ def create_item():
 
         return jsonify(new_item.to_dict())
     else:
-        return "Post route fail items"
+        errors = {}
+        for field, field_errors in form.errors.items():
+            errors[field] = field_errors[0]  # Get the first error message for each field
+
+        # Log the validation errors
+        logging.error(errors)
+
+        return jsonify(errors), 400
 
 @item_routes.route("/<int:id>", methods=["PUT"])
 @login_required
@@ -75,7 +86,7 @@ def update_item(id):
                 upload = upload_file_to_s3(image)
 
                 if 'url' not in upload:
-                    return upload['errors']
+                    return jsonify({'error': 'Failed to upload image'}), 400
 
                 setattr(item, image_name, upload['url'])
 
@@ -86,10 +97,20 @@ def update_item(id):
         if form.data['description']:
             item.description = form.data['description']
 
-        db.session.commit()
-        return item.to_dict()
+        try:
+            db.session.commit()
+            return item.to_dict()
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
     else:
-        return "Bad Put item"
+        errors = {}
+        for field, field_errors in form.errors.items():
+            errors[field] = field_errors[0]  # Get the first error message for each field
+
+        # Log the validation errors
+        logging.error(errors)
+
+        return jsonify(errors), 400
 
 @item_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
