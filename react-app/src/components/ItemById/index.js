@@ -3,6 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getItemIdThunk } from '../../store/item';
 import './ItemById.css';
+import CreateReview from '../Reviews/createReview';
+import UpdateReview from '../Reviews/updateReview';
+import OpenModalButton from '../OpenModalButton/index';
+import { useModal } from '../../context/Modal';
 
 const ItemDetails = () => {
     const { itemId } = useParams();
@@ -12,6 +16,8 @@ const ItemDetails = () => {
     const [selectedImage, setSelectedImage] = useState('');
     const [reviews, setReviews] = useState([]);
     const user = useSelector((state) => state.session.user);
+    const [hasReviewed, setHasReviewed] = useState(false);
+    const { closeModal } = useModal();
 
     useEffect(() => {
         dispatch(getItemIdThunk(itemId)).then(() => setIsLoading(false));
@@ -21,11 +27,22 @@ const ItemDetails = () => {
         if (item) {
             setSelectedImage(item.mainimage);
             setReviews(item.reviews);
+            if (user) {
+                const userReview = item.reviews.find(review => review.user_id === user.id);
+                if (userReview) {
+                    setHasReviewed(true);
+                }
+            }
         }
-    }, [item]);
+    }, [item, user]);
 
     const handleImageClick = (image) => {
         setSelectedImage(image);
+    };
+
+    const handleCloseModal = () => {
+        closeModal();
+        setHasReviewed(true);
     };
 
     if (isLoading) {
@@ -85,10 +102,25 @@ const ItemDetails = () => {
                                 <i key={index} className="fas fa-star"></i>
                             ))}
                         </div>
-                        {/* <div className="review-user">User: {user && user.first_name}</div> */}
-                        {/* <div className="review-user">User: {user ? `${user.first_name} ${user.last_name}` : 'Unknown User'}</div> */}
                     </div>
                 ))}
+                {user && !hasReviewed && user.id !== item.user.id && (
+                    <OpenModalButton
+                        modalComponent={<CreateReview closeModal={handleCloseModal} itemId={itemId} />}
+                        buttonText="Write a Review"
+                    />
+                )}
+                {user && hasReviewed && (
+                    <div>
+                        <OpenModalButton
+                            modalComponent={<UpdateReview closeModal={handleCloseModal} itemId={itemId}
+                                reviewId={reviews.find(review => review.user_id === user.id).id}
+                            />}
+                            buttonText="Edit a Review"
+                        />
+                        <button>Delete Review</button>
+                    </div>
+                )}
             </div>
         </div>
     );
