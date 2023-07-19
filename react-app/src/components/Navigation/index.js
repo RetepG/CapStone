@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import DeleteItem from '../DeleteItem';
 import Logo from "../../assets/Logo.png";
 import './Navigation.css';
 

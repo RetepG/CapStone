@@ -55,7 +55,7 @@ export const deleteItemThunk = (id) => async (dispatch) => {
     const res = await fetch(`/items/${id}`, { method: "DELETE" })
     if (res.ok) {
         await dispatch(deleteItem(id))
-        // dispatch(getAllItemThunk)
+        await dispatch(getAllItemThunk())
     }
 }
 
@@ -87,6 +87,7 @@ const itemReducer = (state = initalState, action) => {
             return newState;
         case DELETE_ITEM:
             newState = { ...state };
+            delete newState.items[action.id];
             delete newState.itemId[action.id];
             return newState;
         default:
