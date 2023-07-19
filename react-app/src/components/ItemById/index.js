@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getItemIdThunk } from '../../store/item';
 import './ItemById.css';
 import CreateReview from '../Reviews/createReview';
+import UpdateReview from '../Reviews/updateReview';
 import OpenModalButton from '../OpenModalButton/index';
 import { useModal } from '../../context/Modal';
 
@@ -41,7 +42,7 @@ const ItemDetails = () => {
 
     const handleCloseModal = () => {
         closeModal();
-        setHasReviewed(true); // Assuming the review is created successfully
+        setHasReviewed(true);
     };
 
     if (isLoading) {
@@ -111,7 +112,12 @@ const ItemDetails = () => {
                 )}
                 {user && hasReviewed && (
                     <div>
-                        <button>Edit Review</button>
+                        <OpenModalButton
+                            modalComponent={<UpdateReview closeModal={handleCloseModal} itemId={itemId}
+                                reviewId={reviews.find(review => review.user_id === user.id).id}
+                            />}
+                            buttonText="Edit a Review"
+                        />
                         <button>Delete Review</button>
                     </div>
                 )}
