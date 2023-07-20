@@ -56,7 +56,7 @@ export const removeAllThunk = () => async (dispatch) => {
     }
 }
 
-const initalState = { cart: {} }
+const initalState = { cart: [] }
 const cartReducer = (state = initalState, action) => {
     let newState
     switch (action.type) {

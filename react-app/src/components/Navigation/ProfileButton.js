@@ -48,6 +48,9 @@ function ProfileButton({ user }) {
           <>
             <li>{user.username}</li>
             <li>{user.email}</li>
+            <li> <NavLink to="/mypage" activeClassName="active">
+              My Profile Page
+            </NavLink></li>
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>
