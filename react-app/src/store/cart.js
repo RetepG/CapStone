@@ -17,7 +17,11 @@ export const getUserCartThunk = () => async (dispatch) => {
 }
 
 export const addCartThunk = (itemId, total) => async (dispatch) => {
-    const res = await fetch(`/carts/add-to-cart`, { method: "POST", body: JSON.stringify(itemId, total) })
+    const res = await fetch(`/carts/add-to-cart`, {
+        method: "POST", headers: {
+            'Content-Type': 'application/json'
+        }, body: JSON.stringify(itemId, total)
+    })
     if (res.ok) {
         await dispatch(getUserCartThunk())
     } else {
@@ -55,11 +59,11 @@ export const removeAllThunk = () => async (dispatch) => {
 const initalState = { cart: {} }
 const cartReducer = (state = initalState, action) => {
     let newState
-    switch(action.type) {
+    switch (action.type) {
         case GET_USER_CART:
-            newState = {...state}
-            action.cart.forEach(cart => { newState.cart[cart.id] = cart})
-            return newState
+            // newState = { ...state, action.cart }
+            // return newState
+            return { ...state, cart: action.cart };
         default:
             return state
     }

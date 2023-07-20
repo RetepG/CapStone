@@ -1,3 +1,5 @@
+import { getAllItemThunk } from "./item"
+
 const GET_ALL_REVIEWS = '/GETALLREVIEWS'
 const CREATE_REVIEW = '/CREATEREVIEW'
 const UPDATE_REVIEW = '/EDITREVIEW'
@@ -102,6 +104,7 @@ export const deleteReviewThunk = (id) => async (dispatch) => {
     const res = await fetch(`/reviews/${id}`, { method: "DELETE" })
     if (res.ok) {
         await dispatch(deleteReviews(id))
+        await dispatch(getAllItemThunk())
     }
 }
 
