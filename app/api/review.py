@@ -41,36 +41,10 @@ def create_review():
         return 'bad review post'
 
 # Edit review comment
-# @review_routes.route('/<int:id>', methods=['PUT'])
-# @login_required
-# def edit_review(id):
-#     review = Review.query.get(id)
-
-#     form = ReviewForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-
-#     if form.validate_on_submit():
-#         if form.data['review']:
-#             review.review = form.data['review']
-#         if form.data['star']:
-#             review.star = form.data['star']
-
-#         db.session.commit()
-#         return review.to_dict()
-#     else:
-#         return "edit error"
 @review_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def edit_review(id):
     review = Review.query.get(id)
-
-    # Check if the review exists
-    if not review:
-        return "Review not found"
-
-    # Check if the logged-in user is the owner of the review
-    if review.user_id != current_user.id:
-        return "Unauthorized to edit this review"
 
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -84,8 +58,7 @@ def edit_review(id):
         db.session.commit()
         return review.to_dict()
     else:
-        return "Edit error"
-
+        return "edit error"
 
 # Delete a review
 @review_routes.route('/<int:id>', methods=['DELETE'])

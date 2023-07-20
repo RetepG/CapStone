@@ -10,6 +10,7 @@ import ItemDetails from "./components/ItemById";
 import CreateItem from "./components/CreateItem";
 import UpdateItem from "./components/UpdateItems";
 import MyPage from "./components/MyPage";
+// import UserCart from "./components/Cart/UserCart";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function App() {
           <Route path="/mypage">
             <MyPage />
           </Route>
+          {/* <Route path="/user/cart/:userId">
+            <UserCart />
+          </Route> */}
           <Route path="/items/:itemId/update">
             <UpdateItem />
           </Route>

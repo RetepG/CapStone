@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllItemThunk, deleteItemThunk } from "../../store/item";
+import { getAllItemThunk } from "../../store/item";
 import { NavLink } from "react-router-dom";
 import "./LandingPage.css";
 
@@ -24,10 +24,6 @@ function LandingPage() {
     const getRandomItems = (arr, num) => {
         const shuffled = arr.sort(() => 0.5 - Math.random());
         return shuffled.slice(0, num);
-    };
-
-    const handleDelete = (id) => {
-        dispatch(deleteItemThunk(id));
     };
 
     if (!items) {

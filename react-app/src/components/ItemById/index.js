@@ -7,6 +7,8 @@ import CreateReview from '../Reviews/createReview';
 import UpdateReview from '../Reviews/updateReview';
 import OpenModalButton from '../OpenModalButton/index';
 import { useModal } from '../../context/Modal';
+import DeleteReview from '../Reviews/deleteReview';
+import Cart from '../Cart';
 
 const ItemDetails = () => {
     const { itemId } = useParams();
@@ -27,14 +29,19 @@ const ItemDetails = () => {
         if (item) {
             setSelectedImage(item.mainimage);
             setReviews(item.reviews);
-            if (user) {
-                const userReview = item.reviews.find(review => review.user_id === user.id);
-                if (userReview) {
-                    setHasReviewed(true);
-                }
+        }
+    }, [item]);
+
+    useEffect(() => {
+        if (reviews.length > 0 && user) {
+            const userReview = reviews.find((review) => review.user_id === user.id);
+            if (userReview) {
+                setHasReviewed(true);
+            } else {
+                setHasReviewed(false);
             }
         }
-    }, [item, user]);
+    }, [reviews, user]);
 
     const handleImageClick = (image) => {
         setSelectedImage(image);
@@ -43,6 +50,12 @@ const ItemDetails = () => {
     const handleCloseModal = () => {
         closeModal();
         setHasReviewed(true);
+    };
+
+    const handleReviewDelete = (reviewId) => {
+        // After the review is successfully deleted, update the reviews state
+        const updatedReviews = reviews.filter((review) => review.id !== reviewId);
+        setReviews(updatedReviews);
     };
 
     if (isLoading) {
@@ -90,6 +103,7 @@ const ItemDetails = () => {
                     <div className="price">Price ${item.price}</div>
                     <div className="description-title">Description</div>
                     <div className="description">{item.description}</div>
+                    <Cart itemId={itemId} />
                 </div>
             </div>
             <div className="reviews-container">
@@ -113,12 +127,26 @@ const ItemDetails = () => {
                 {user && hasReviewed && (
                     <div>
                         <OpenModalButton
-                            modalComponent={<UpdateReview closeModal={handleCloseModal} itemId={itemId}
-                                reviewId={reviews.find(review => review.user_id === user.id).id}
-                            />}
+                            modalComponent={
+                                <UpdateReview
+                                    closeModal={handleCloseModal}
+                                    itemId={itemId}
+                                    reviewId={reviews.find((review) => review.user_id === user.id)?.id}
+                                />
+                            }
                             buttonText="Edit a Review"
                         />
-                        <button>Delete Review</button>
+                        <OpenModalButton
+                            modalComponent={
+                                <DeleteReview
+                                    closeModal={handleCloseModal}
+                                    itemId={itemId}
+                                    reviewId={reviews.find((review) => review.user_id === user.id)?.id}
+                                    onDelete={handleReviewDelete}
+                                />
+                            }
+                            buttonText={"Delete Review"}
+                        />
                     </div>
                 )}
             </div>

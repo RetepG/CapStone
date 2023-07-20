@@ -1,23 +1,21 @@
 import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
-import { deleteItemThunk } from "../../store/item";
-import { useHistory } from "react-router-dom";
+import { deleteReviewThunk, getReviewThunk } from "../../store/review";
 
-function DeleteItem({ item_id }) {
+function DeleteReview({ reviewId, itemId }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const handleDelete = async (shouldDelete) => {
         if (shouldDelete) {
-            await dispatch(deleteItemThunk(item_id));
-            history.push("/");
+            await dispatch(deleteReviewThunk(reviewId, itemId));
+            await dispatch(getReviewThunk(itemId, reviewId))
         }
         closeModal();
     };
 
     return (
-        <div className="delete-item-container">
+        <div className="delete-review-container">
             <h2>Confirm Delete</h2>
             <p>Are you sure you want to remove this Item?</p>
             <div className="delete-button-container">
@@ -32,4 +30,4 @@ function DeleteItem({ item_id }) {
     );
 }
 
-export default DeleteItem;
+export default DeleteReview;
