@@ -5,16 +5,17 @@ const getUserCart = (cart) => {
 }
 
 export const getUserCartThunk = () => async (dispatch) => {
-    const res = await fetch(`/carts/`)
+    const res = await fetch(`/carts/`);
 
     if (res.ok) {
-        const cart = await res.json()
-        await dispatch(getUserCart(cart))
-        return cart
+        const response = await res.json();
+        const cart = response.cart;
+        await dispatch(getUserCart(cart));
+        return cart;
     } else {
-        return "Cant get cart details"
+        return "Can't get cart details";
     }
-}
+};
 
 export const addCartThunk = (itemId, total) => async (dispatch) => {
     const res = await fetch(`/carts/add-to-cart`, {
@@ -29,15 +30,21 @@ export const addCartThunk = (itemId, total) => async (dispatch) => {
     }
 }
 
-export const updateCartThunk = (itemId, total) => async (dispatch) => {
-    const res = await fetch(`/carts/add-to-cart`, { method: "PUT", body: JSON.stringify(total) })
+// export const updateCartThunk = (itemId, total) => async (dispatch) => {
+//     const res = await fetch(`/carts/add-to-cart`, { method: "PUT", body: JSON.stringify(total) })
+//     if (res.ok) {
+//         await dispatch(getUserCartThunk())
+//     }
+// }
+export const updateCartThunk = (updatedCart) => async (dispatch) => {
+    const res = await fetch(`/carts/add-to-cart`, { method: "PUT", body: JSON.stringify(updatedCart) })
     if (res.ok) {
         await dispatch(getUserCartThunk())
     }
 }
 
 export const removeOneThunk = (itemId) => async (dispatch) => {
-    const res = await fetch(`/items/${itemId}`, { method: "DELETE" })
+    const res = await fetch(`/carts/items/${itemId}`, { method: "DELETE" })
     if (res.ok) {
         dispatch(getUserCartThunk())
         return "deleted"
@@ -56,17 +63,21 @@ export const removeAllThunk = () => async (dispatch) => {
     }
 }
 
-const initalState = { cart: [] }
-const cartReducer = (state = initalState, action) => {
-    let newState
+
+const initialState = {
+    cart: [],
+};
+
+const cartReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_USER_CART:
-            // newState = { ...state, action.cart }
-            // return newState
-            return { ...state, cart: action.cart };
+            return {
+                ...state,
+                cart: action.cart, // Update the cart items in the state
+            };
         default:
-            return state
+            return state;
     }
-}
+};
 
-export default cartReducer
+export default cartReducer;
