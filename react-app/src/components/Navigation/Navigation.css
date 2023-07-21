@@ -7,13 +7,13 @@
   font-size: 3rem;
   margin-left: 1rem;
   text-decoration: none;
-  color: blue;
+  color: black;
   font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
 .Nav-container{
   border-bottom: solid #ddd 2px;
-  height: 4rem;
+  height: 3.5rem;
 }
 
 .Nav-bar {

@@ -9,7 +9,7 @@ class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     name = db.Column(db.String(255), nullable=False)
-    price = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
     description = db.Column(db.String(255))
     mainimage = db.Column(db.String(255), nullable=False)
     sideimage = db.Column(db.String(255), nullable=False)
