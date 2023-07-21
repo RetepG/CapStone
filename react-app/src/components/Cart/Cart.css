@@ -1,0 +1,23 @@
+.Id-quantity{
+    width: 4rem;
+}
+
+.add-to-cart-button{
+    width: 15rem;
+    height: 2rem;
+    background-color: black;
+    color: white;
+}
+
+.add-to-cart-button:hover{
+    cursor: pointer;
+}
+
+.id-quantity-page{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.name-quantity{
+    font-size: 1.1rem;
+}

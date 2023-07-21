@@ -33,7 +33,7 @@ function LandingPage() {
     return (
         <>
             <h1 className="Greeting">
-                {user ? `Welcome back, ${user.username}` : "Welcome to Blah Blah"}
+                {user ? `Welcome back, ${user.username}!` : "Welcome to PawCo"}
             </h1>
             <div className="Landing-Page-Container">
                 {featuredItems.length > 0 ? (
@@ -45,7 +45,7 @@ function LandingPage() {
                                     <NavLink className="Redirect_ItemId" to={`/items/${item.id}`}>
                                         <img className="mainpic" src={item.mainimage} alt={item.name} />
                                         <p className="price-landing">${item.price.toFixed(2)}</p>
-                                        {item.name}
+                                        <div className="landing-name">{item.name}</div>
                                     </NavLink>
                                 </li>
                             ))}

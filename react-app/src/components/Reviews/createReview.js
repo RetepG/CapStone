@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import { useState } from "react";
 import { getItemIdThunk } from "../../store/item";
 import { createReviewThunk } from "../../store/review";
+import "./createReview.css"
 
 function CreateReview({ itemId }) {
     const [review, setReview] = useState("");
@@ -34,7 +35,7 @@ function CreateReview({ itemId }) {
 
     return (
         <div className="create-review">
-            <h2>Create a Review</h2>
+            <h2 className="h2-create-review"> Create a Review</h2>
             <form onSubmit={handleSubmit} method="POST" className="create-review-form">
                 <label className="review">
                     <textarea

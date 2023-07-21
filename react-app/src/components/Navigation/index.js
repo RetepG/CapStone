@@ -1,43 +1,9 @@
-// import React from 'react';
-// import { NavLink } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-// import ProfileButton from './ProfileButton';
-// import DeleteItem from '../DeleteItem';
-// import Logo from "../../assets/Logo.png";
-// import './Navigation.css';
-
-// function Navigation({ isLoaded }) {
-// 	const sessionUser = useSelector(state => state.session.user);
-
-// 	return (
-// 		<ul>
-// 			<div className='Nav-bar'>
-// 				<li>
-// 					<NavLink exact to="/" className='Logo-link'>
-// 						<img src={Logo} alt="Cat Logo" className='Logo'></img>
-// 					</NavLink>
-// 					<NavLink className="Home" exact to="/">BlahBlah</NavLink>
-// 				</li>
-// 				<NavLink to="/items/new" activeClassName="active">
-// 					Create a New Item
-// 				</NavLink>
-// 				{isLoaded && (
-// 					<li className='Profile'>
-// 						<ProfileButton user={sessionUser} />
-// 					</li>
-// 				)}
-// 			</div>
-// 		</ul>
-// 	);
-// }
-
-// export default Navigation;
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import Logo from "../../assets/Logo.png";
+import cart from "../../assets/cart.png"
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -45,25 +11,31 @@ function Navigation({ isLoaded }) {
 
 	return (
 		<ul>
-			<div className='Nav-bar'>
-				<li>
-					<NavLink exact to="/" className='Logo-link'>
-						<img src={Logo} alt="Cat Logo" className='Logo'></img>
-					</NavLink>
-					<NavLink className="Home" exact to="/">BlahBlah</NavLink>
-				</li>
-				{sessionUser && (
-					<li>
-						<NavLink to="/items/new" activeClassName="active">
-							Create a New Item
+			<div className='Nav-container'>
+				<div className='Nav-bar'>
+					<div className='Top-left-nav'>
+						<NavLink exact to="/" className='Logo-link'>
+							<img src={Logo} alt="Cat Logo" className='Logo'></img>
 						</NavLink>
-					</li>
-				)}
-				{isLoaded && (
-					<li className='Profile'>
-						<ProfileButton user={sessionUser} />
-					</li>
-				)}
+						<NavLink className="Home" exact to="/">PawCo</NavLink>
+					</div>
+					{sessionUser && (
+						<li>
+							<NavLink to="/items/new" activeClassName="active" className="Create-Link">
+								Create a New Item
+							</NavLink>
+
+							<NavLink to="/user/cart/:userId" activeClassName="active">
+								<img src={cart} alt="cart Logo" className='Nav-Cart'></img>
+							</NavLink>
+						</li>
+					)}
+					{isLoaded && (
+						<li className='Profile'>
+							<ProfileButton user={sessionUser} />
+						</li>
+					)}
+				</div>
 			</div>
 		</ul>
 	);

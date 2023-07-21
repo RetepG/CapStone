@@ -4,26 +4,75 @@
 }
 
 .Home {
-  font-size: 2rem;
+  font-size: 3rem;
   margin-left: 1rem;
   text-decoration: none;
   color: blue;
   font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
+.Nav-container{
+  border-bottom: solid #ddd 2px;
+  height: 4rem;
+}
+
 .Nav-bar {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  border-bottom: solid #ddd 2px;
-  height: 3.5rem;
+  align-items: center;
   width: 100%;
   list-style: none;
 }
 
 .Logo {
   padding-top: 0.2rem;
+  height: 3rem;
+  width: 3rem;
+  margin-left: 10rem;
+}
+
+.Nav-Cart {
+  width: 5rem;
   height: 2.5rem;
-  width: 2.5rem;
-  margin-left: 20rem;
+  padding-left: 5rem;
+}
+
+.Create-Link {
+  text-decoration: none;
+  font-size: 2.5rem;
+}
+
+.Top-left-nav {
+  display: flex;
+  justify-content: center;
+}
+
+.Profile-button {
+  border: none;
+  font-size: 2.5rem;
+  padding-right: 5rem;
+  background-color: white;
+}
+
+.profile-dropdown {
+  border: grey solid 2px;
+  background: white;
+  text-align: start;
+  color: black;
+  font-size: 1.2rem;
+  width: 100%;
+  max-width: 12rem;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  margin-right: 5rem;
+  margin-top: .2rem;
+  position: absolute;
+  right: 0;
+  list-style: none;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+}
+
+.Create-Link{
+  /* padding-left: 50rem; */
 }

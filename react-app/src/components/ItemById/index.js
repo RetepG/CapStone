@@ -120,7 +120,7 @@ const ItemDetails = () => {
                 ))}
                 {user && !hasReviewed && user.id !== item.user.id && (
                     <OpenModalButton
-                        modalComponent={<CreateReview closeModal={handleCloseModal} itemId={itemId} />}
+                        modalComponent={<CreateReview closeModal={handleCloseModal} itemId={itemId} className="write-review" />}
                         buttonText="Write a Review"
                     />
                 )}
