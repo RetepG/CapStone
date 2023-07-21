@@ -2,6 +2,7 @@ import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
 import { deleteItemThunk } from "../../store/item";
 import { useHistory } from "react-router-dom";
+import "./deleteitem.css"
 
 function DeleteItem({ item_id }) {
     const { closeModal } = useModal();

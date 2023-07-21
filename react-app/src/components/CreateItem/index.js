@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { createItemThunk } from "../../store/item";
 import { useHistory } from "react-router-dom";
+import "./createItem.css"
 
 function CreateItem() {
     const currentUser = useSelector(state => state.session.user);
@@ -208,7 +209,7 @@ function CreateItem() {
                     </div>
                 </div>
                 <div className="submit_button-create-item">
-                    <button type="submit" disabled={isLoading}>
+                    <button className="Submit-create-item-button" type="submit" disabled={isLoading}>
                         {isLoading ? "Submitting..." : "Submit"}
                     </button>
                 </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { getItemIdThunk, updateItemThunk } from "../../store/item";
 import { useParams, useHistory } from 'react-router-dom';
+import "./updateItem.css"
 
 function UpdateItem() {
     const { itemId } = useParams();
@@ -244,7 +245,7 @@ function UpdateItem() {
                     </div>
                 </div>
                 <div className="submit_button-update-item">
-                    <button type="submit" disabled={isLoading}>
+                    <button className="Submit-update-item-button" type="submit" disabled={isLoading}>
                         {isLoading ? "Updating..." : "Update"}
                     </button>
                 </div>

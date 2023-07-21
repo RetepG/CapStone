@@ -1,12 +1,17 @@
+.MyPage-title,
+.MyPage-items {
+    text-align: center;
+}
+
 .MyPage-wrapper {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
     justify-content: center;
 }
 
 .MyPage-item-container {
-    width: 20%;
-    margin: 10px;
+    width: 100%;
 }
 
 .MyPage-mainimage-container {
@@ -17,11 +22,13 @@
 .MyPage-mainimage {
     width: 25rem;
     height: 25rem;
+    border: 5px solid #ccc;
 }
 
 .Mypage-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 .Mypage-update-item,
@@ -33,6 +40,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+
 }
 
 .Mypage-update-item:hover,
@@ -42,4 +50,8 @@
 
 .Mypage-delete-item {
     margin-left: 10px;
+}
+
+.MyPage-name{
+    text-decoration: none;
 }
