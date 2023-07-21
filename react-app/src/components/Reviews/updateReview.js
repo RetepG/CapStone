@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { getItemIdThunk } from "../../store/item";
 import { updateReviewThunk } from "../../store/review";
 import { getReviewThunk } from "../../store/review";
+import "./updatereview.css"
 
 function UpdateReview({ reviewId, itemId }) {
     const dispatch = useDispatch();
@@ -62,7 +63,7 @@ function UpdateReview({ reviewId, itemId }) {
 
     return (
         <div className="update-review">
-            <h2>Update Review</h2>
+            <h2 className="h2-update-review">Update Review</h2>
             <form onSubmit={handleSubmit} method="PUT" className="update-review-form">
                 <label className="review">
                     <textarea

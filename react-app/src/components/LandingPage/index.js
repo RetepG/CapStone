@@ -31,7 +31,7 @@ function LandingPage() {
     }
 
     return (
-        <>
+        <div className="landing-page-whole">
             <h1 className="Greeting">
                 {user ? `Welcome back, ${user.username}!` : "Welcome to PawCo"}
             </h1>
@@ -44,7 +44,8 @@ function LandingPage() {
                                 <li key={item.id}>
                                     <NavLink className="Redirect_ItemId" to={`/items/${item.id}`}>
                                         <img className="mainpic" src={item.mainimage} alt={item.name} />
-                                        <p className="price-landing">${item.price.toFixed(2)}</p>
+                                        {/* <p className="price-landing">${item.price.toFixed(2)}</p> */}
+                                        <p className="price-landing">${item.price}</p>
                                         <div className="landing-name">{item.name}</div>
                                     </NavLink>
                                 </li>
@@ -54,29 +55,31 @@ function LandingPage() {
                 ) : (
                     <p>No featured items available</p>
                 )}
-
-                {items.length > 0 ? (
-                    <ul className="All-Items-List">
-                        {items.map((item) => {
-                            if (!featuredItems.some((featuredItem) => featuredItem.id === item.id)) {
-                                return (
-                                    <li key={item.id}>
-                                        <NavLink className="Redirect_ItemId" to={`/items/${item.id}`}>
-                                            <img className="mainpic" src={item.mainimage} alt={item.name} />
-                                            <p className="price-landing">${item.price.toFixed(2)}</p>
-                                            {item.name}
-                                        </NavLink>
-                                    </li>
-                                );
-                            }
-                            return null;
-                        })}
-                    </ul>
-                ) : (
-                    <p>No items available</p>
-                )}
+                <div className="background-white">
+                    {items.length > 0 ? (
+                        <ul className="All-Items-List">
+                            {items.map((item) => {
+                                if (!featuredItems.some((featuredItem) => featuredItem.id === item.id)) {
+                                    return (
+                                        <li key={item.id}>
+                                            <NavLink className="Redirect_ItemId" to={`/items/${item.id}`}>
+                                                <img className="mainpic" src={item.mainimage} alt={item.name} />
+                                                {/* <p className="price-landing">${item.price.toFixed(2)}</p> */}
+                                                <p className="price-landing">${item.price}</p>
+                                                {item.name}
+                                            </NavLink>
+                                        </li>
+                                    );
+                                }
+                                return null;
+                            })}
+                        </ul>
+                    ) : (
+                        <p>No items available</p>
+                    )}
+                </div>
             </div>
-        </>
+        </div>
     );
 }
 

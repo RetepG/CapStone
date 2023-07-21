@@ -7,8 +7,8 @@
 }
 
 .Featured-Items-Container {
-    background-color: lightblue;
-    padding: 20px;
+    background-color: peachpuff;
+    /* padding: 20px; */
     border-radius: 5px;
     margin-bottom: 20px;
 }
@@ -39,8 +39,9 @@
 }
 
 .All-Items-List li {
+    padding-top: 5px;
     margin-bottom: 20px;
-    background-color: #e6e6e6;
+    /* background-color: #e6e6e6; */
 }
 
 .All-Items-List li a {
@@ -54,7 +55,7 @@
     max-height: 20rem;
     object-fit: cover;
     border-radius: 15px;
-    border: solid 5px lightgray;
+    border: solid 3px black;
 }
 
 .price-landing {
@@ -78,4 +79,12 @@
     font-size: 1.3rem;
     color: black;
     font-weight: bold;
+}
+
+.landing-page-whole{
+    background-color: peachpuff;
+}
+
+.background-white{
+    background-color: white;
 }
