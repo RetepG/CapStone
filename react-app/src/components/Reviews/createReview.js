@@ -42,7 +42,7 @@ function CreateReview({ itemId }) {
                         type="text"
                         rows={7}
                         cols={31}
-                        placeholder="Leave your review here..."
+                        placeholder="Min 10 characters! Leave your review here..."
                         value={review}
                         onChange={(e) => setReview(e.target.value)}
                         required

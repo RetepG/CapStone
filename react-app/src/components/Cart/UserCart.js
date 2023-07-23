@@ -173,7 +173,7 @@ function UserCart() {
                         );
                     })
                 ) : (
-                    <p>There are no items in your cart</p>
+                    <p className="Empty">There are no items in your cart</p>
                 )}
             </div>
             <div className="purchase-container">
