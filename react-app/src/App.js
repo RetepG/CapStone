@@ -36,7 +36,7 @@ function App() {
           <Route path="/mypage">
             <MyPage />
           </Route>
-          <Route path="/user/cart/:userId">
+          <Route path="/user/cart">
             <UserCart />
           </Route>
           <Route path="/items/:itemId/update">

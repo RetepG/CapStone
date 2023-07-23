@@ -5,6 +5,7 @@ import { getAllItemThunk } from "../../store/item";
 import { NavLink } from "react-router-dom";
 import "./Usercart.css";
 import { isEqual } from "lodash"; // Import lodash's isEqual function
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function UserCart() {
     const user = useSelector((state) => state.session.user);
@@ -15,6 +16,8 @@ function UserCart() {
     const dispatch = useDispatch();
     const [quantityMap, setQuantityMap] = useState({});
     const [errorMessageMap, setErrorMessageMap] = useState({});
+    const history = useHistory();
+    const [redirecting, setRedirecting] = useState(false);
 
     const prevCartArray = usePrevious(cartArray); // Use custom hook to get previous value
 
@@ -71,9 +74,19 @@ function UserCart() {
         dispatch(getAllItemThunk());
     };
 
+    // const purchase = async () => {
+    //     setIsPurchase(true);
+    //     await dispatch(removeAllThunk());
+    // };
     const purchase = async () => {
         setIsPurchase(true);
         await dispatch(removeAllThunk());
+
+        // Add a timeout to redirect back to the "/" URL after 5 seconds
+        setRedirecting(true);
+        setTimeout(() => {
+            history.push("/");
+        }, 5000);
     };
 
     const getTotalPrice = () => {
@@ -99,7 +112,12 @@ function UserCart() {
     }
 
     if (isPurchase) {
-        return <h1 className="Purchase">Thank You For Your Purchase!</h1>;
+        return (
+            <div className="Purchase-redirect">
+                <h1 className="Purchase">Thank You For Your Purchase!</h1>
+                <div className="redirect-home">Redirecting in 5 seconds....</div>
+            </div>
+        )
     }
 
     return (
@@ -128,8 +146,8 @@ function UserCart() {
                                             <p className="User-Cart-Price">$ {item.price}</p>
                                         </div>
                                     </NavLink>
-                                    Quantity:{" "}
-                                    <input
+                                    {/* Quantity:{" "} */}
+                                    {/* <input
                                         className="quantitySelector"
                                         type="number"
                                         onChange={(e) =>
@@ -139,7 +157,8 @@ function UserCart() {
                                             }))
                                         }
                                         value={quantityMap[cart.item_id] || cart.quantity}
-                                    ></input>
+                                    ></input> */}
+                                    <div>Quantity: {cart.quantity}</div>
                                     <div className="update-remove">
                                         {/* <button className="updateCartButton" onClick={() => handleUpdateCart(item.id)}>
                                             Update

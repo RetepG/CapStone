@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCartThunk, getUserCartThunk } from '../../store/cart';
+import { addCartThunk } from '../../store/cart';
 import "./Cart.css"
 
 const Cart = ({ itemId }) => {

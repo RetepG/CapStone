@@ -56,9 +56,17 @@
     }
 
     .removeCartButton {
-        margin-left: 10px;
+        margin-left: 5px;
+        margin-top: 5px;
+        width: 7rem;
+        height: 2.5rem;
+        background-color: black;
+        color: white;
     }
 
+    .removeCartButton:hover {
+        cursor: pointer;
+    }
 
     .totalItems,
     .totalPrice {
@@ -72,6 +80,15 @@
 
     .purchaseButton {
         margin-top: 10px;
+        /* width: 5rem; */
+        width: 7rem;
+        height: 2.5rem;
+        background-color: black;
+        color: white;
+    }
+
+    .purchaseButton:hover {
+        cursor: pointer;
     }
 
     .Cart-name {
@@ -101,6 +118,25 @@
         align-items: center;
         justify-content: center;
         font-size: 30px;
+    }
+
+    .Purchase-redirect {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .Purchase {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .redirect-home {
+        font-size: 18px;
+        color: #777;
     }
 }
 
@@ -162,9 +198,17 @@
     }
 
     .removeCartButton {
-        margin-left: 10px;
+        margin-left: 5px;
+        margin-top: 5px;
+        width: 7rem;
+        height: 2.5rem;
+        background-color: black;
+        color: white;
     }
 
+    .removeCartButton:hover {
+        cursor: pointer;
+    }
 
     .totalItems,
     .totalPrice {
@@ -178,6 +222,15 @@
 
     .purchaseButton {
         margin-top: 10px;
+        /* width: 5rem; */
+        width: 7rem;
+        height: 2.5rem;
+        background-color: black;
+        color: white;
+    }
+
+    .purchaseButton:hover {
+        cursor: pointer;
     }
 
     .Cart-name {
@@ -207,6 +260,25 @@
         align-items: center;
         justify-content: center;
         font-size: 15px;
+    }
+
+    .Purchase-redirect {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .Purchase {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .redirect-home {
+        font-size: 18px;
+        color: #777;
     }
 }
 
@@ -266,7 +338,16 @@
     }
 
     .removeCartButton {
-        margin-left: 10px;
+        margin-top: 5px;
+        margin-left: 5px;
+        width: 7rem;
+        height: 2.5rem;
+        background-color: black;
+        color: white;
+    }
+
+    .removeCartButton:hover {
+        cursor: pointer;
     }
 
 
@@ -282,6 +363,15 @@
 
     .purchaseButton {
         margin-top: 10px;
+        /* width: 5rem; */
+        width: 7rem;
+        height: 2.5rem;
+        background-color: black;
+        color: white;
+    }
+
+    .purchaseButton:hover {
+        cursor: pointer;
     }
 
     .Cart-name {
@@ -311,5 +401,24 @@
         align-items: center;
         justify-content: center;
         font-size: 23px;
+    }
+
+    .Purchase-redirect {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .Purchase {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .redirect-home {
+        font-size: 18px;
+        color: #777;
     }
 }
