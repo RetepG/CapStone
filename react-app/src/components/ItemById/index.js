@@ -20,6 +20,8 @@ const ItemDetails = () => {
     const user = useSelector((state) => state.session.user);
     const [hasReviewed, setHasReviewed] = useState(false);
     const { closeModal } = useModal();
+    const isLoggedIn = !!user;
+    const isMyItem = user && item && item.user.id === user.id;
 
     useEffect(() => {
         dispatch(getItemIdThunk(itemId)).then(() => setIsLoading(false));
@@ -103,7 +105,20 @@ const ItemDetails = () => {
                     <div className="price">Price ${item.price}</div>
                     <div className="description-title">Description</div>
                     <div className="description">{item.description}</div>
-                    <Cart itemId={itemId} />
+                    {isLoggedIn && !isMyItem ? ( // Check if the user is logged in and the item is not theirs
+                        <Cart itemId={itemId} /> // Render the cart if the user is logged in and the item is not theirs
+                    ) : (
+                        isMyItem ? (
+                            <div>
+                                This is your item. You cannot add it to the cart. {/* Message for the user's own item */}
+                            </div>
+                        ) : (
+                            <div>
+                                Please log in to add items to your cart. {/* Message for non-logged in users */}
+                            </div>
+                        )
+                    )}
+                    {/* <Cart itemId={itemId} /> */}
                 </div>
             </div>
             <div className="reviews-container">
