@@ -25,7 +25,7 @@ function Navigation({ isLoaded }) {
 								Create a New Item
 							</NavLink>
 
-							<NavLink to="/user/cart/:userId" activeClassName="active">
+							<NavLink to="/user/cart" activeClassName="active">
 								<img src={cart} alt="cart Logo" className='Nav-Cart'></img>
 							</NavLink>
 						</li>
