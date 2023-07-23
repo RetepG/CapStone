@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
+import DeleteOpenModalButton from "../DeleteModalButton";
 import DeleteItem from "../DeleteItem";
 import { getAllItemThunk } from "../../store/item";
 import "./MyPage.css";
@@ -38,7 +39,7 @@ const MyPage = () => {
                             <button className="Mypage-update-item" onClick={() => history.push(`/items/${item.id}/update`)}>
                                 Update
                             </button>
-                            <OpenModalButton
+                            <DeleteOpenModalButton
                                 className="Mypage-delete-item"
                                 buttonText={`Delete item`}
                                 modalComponent={<DeleteItem item_id={item.id} />}

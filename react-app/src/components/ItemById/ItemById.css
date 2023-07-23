@@ -133,6 +133,15 @@
     .review-text {
         width: 100rem;
     }
+
+    .id-reviewbutton-container {
+        margin-left: 10rem;
+        margin-top: 1rem;
+    }
+
+    .itemid-myitem{
+        padding-top: 4rem;
+    }
 }
 
 @media (min-width: 2000px) {
@@ -269,5 +278,14 @@
     /* width of review */
     .review-text {
         width: 100rem;
+    }
+
+    .id-reviewbutton-container {
+        margin-left: 10rem;
+        margin-top: 1rem;
+    }
+
+    .itemid-myitem{
+        padding-top: 4rem;
     }
 }

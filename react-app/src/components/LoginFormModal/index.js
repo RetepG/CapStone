@@ -11,6 +11,7 @@ function LoginFormModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [invalidCreds, setInvalidCreds] = useState(false);
   const { closeModal } = useModal();
   const sessionUser = useSelector((state) => state.session.user);
   const history = useHistory();
@@ -22,6 +23,7 @@ function LoginFormModal() {
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
+      setInvalidCreds(true); // Set invalidCreds to true when login fails
     } else {
       closeModal();
     }
@@ -39,11 +41,12 @@ function LoginFormModal() {
   return (
     <div className="login-form-modal">
       <h1>Log In</h1>
+      {invalidCreds && <p className="error-message">Invalid Credentials. Please Try Again!</p>} {/* New error message */}
       <form onSubmit={handleSubmit}>
         <ul>
-          {errors.map((error, idx) => (
+          {/* {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
-          ))}
+          ))} */}
         </ul>
         <div className="form-field">
           <label>Email</label>

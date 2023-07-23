@@ -1,0 +1,12 @@
+.deletemodalbutton{
+    width: 7rem;
+    height: 2rem;
+    background-color: red;
+    color: white;
+    margin-left: 1rem;
+    border-radius: 5px;
+}
+
+.deletemodalbutton:hover{
+    cursor: pointer;
+}

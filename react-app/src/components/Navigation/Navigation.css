@@ -3,6 +3,15 @@
   position: absolute;
 }
 
+* {
+  font-family: Roboto, Helvetica Neue, sans-serif
+}
+
+.Nav-container {
+  border-bottom: solid #ddd 2px;
+  height: 3.8rem;
+}
+
 .Home {
   font-size: 3rem;
   margin-left: 1rem;
@@ -11,10 +20,6 @@
   font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
-.Nav-container{
-  border-bottom: solid #ddd 2px;
-  height: 3.5rem;
-}
 
 .Nav-bar {
   display: flex;
@@ -28,30 +33,60 @@
   padding-top: 0.2rem;
   height: 3rem;
   width: 3rem;
-  margin-left: 10rem;
+  margin-left: 5rem;
 }
 
 .Nav-Cart {
   width: 5rem;
   height: 2.5rem;
-  padding-left: 5rem;
+  margin-left: 1.5rem;
+  margin-right: 2rem;
 }
 
 .Create-Link {
   text-decoration: none;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
+  color: black;
+}
+
+.Create-words {
+  text-decoration: none;
+  font-size: 1rem
 }
 
 .Top-left-nav {
   display: flex;
   justify-content: center;
+  width: 20%;
+}
+
+.filler {
+  width: 30%
+}
+
+.nav-width {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  justify-content: flex-end;
+  padding-top: 5px;
+}
+
+.New-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .Profile-button {
   border: none;
   font-size: 2.5rem;
-  padding-right: 5rem;
+  padding-right: 3rem;
   background-color: white;
+}
+
+.Profile-button:hover{
+  cursor: pointer;
 }
 
 .profile-dropdown {
@@ -73,6 +108,12 @@
   font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
-.Create-Link{
-  /* padding-left: 50rem; */
+.Nav-square {
+  height: 2rem;
+  width: 2rem;
+}
+
+.about-me{
+  width: 2.6rem;
+  height: 2.6rem;
 }
