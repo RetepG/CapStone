@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { NavLink } from "react-router-dom"
+import "./profilebutton.css"
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -49,11 +50,14 @@ function ProfileButton({ user }) {
             <div className="Dropdown-Menu">
               <li>{user.username}</li>
               <li>{user.email}</li>
-              <li> <NavLink to="/mypage" activeClassName="active">
+              <li className="MyPage-Navbar"> <NavLink to="/mypage" activeClassName="active">
                 My Profile Page
               </NavLink></li>
               <li>
-                <button onClick={handleLogout}>Log Out</button>
+                <i class="fa-solid fa-square-plus"></i>
+              </li>
+              <li>
+                <button className="nav-logout" onClick={handleLogout}>Log Out</button>
               </li>
             </div>
           </>

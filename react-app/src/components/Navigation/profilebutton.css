@@ -1,0 +1,14 @@
+.nav-logout{
+    width: 7rem;
+    height: 2rem;
+    margin-top: 0.5rem;
+    border-radius: 5px;
+}
+
+.nav-logout:hover{
+    cursor: pointer;
+}
+
+.MyPage-Navbar{
+    text-decoration: none;
+}

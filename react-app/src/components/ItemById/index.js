@@ -6,6 +6,7 @@ import './ItemById.css';
 import CreateReview from '../Reviews/createReview';
 import UpdateReview from '../Reviews/updateReview';
 import OpenModalButton from '../OpenModalButton/index';
+import DeleteOpenModalButton from '../DeleteModalButton';
 import { useModal } from '../../context/Modal';
 import DeleteReview from '../Reviews/deleteReview';
 import Cart from '../Cart';
@@ -20,6 +21,8 @@ const ItemDetails = () => {
     const user = useSelector((state) => state.session.user);
     const [hasReviewed, setHasReviewed] = useState(false);
     const { closeModal } = useModal();
+    const isLoggedIn = !!user;
+    const isMyItem = user && item && item.user.id === user.id;
 
     useEffect(() => {
         dispatch(getItemIdThunk(itemId)).then(() => setIsLoading(false));
@@ -103,7 +106,20 @@ const ItemDetails = () => {
                     <div className="price">Price ${item.price}</div>
                     <div className="description-title">Description</div>
                     <div className="description">{item.description}</div>
-                    <Cart itemId={itemId} />
+                    {isLoggedIn && !isMyItem ? ( // Check if the user is logged in and the item is not theirs
+                        <Cart itemId={itemId} /> // Render the cart if the user is logged in and the item is not theirs
+                    ) : (
+                        isMyItem ? (
+                            <div className='itemid-myitem'>
+                                This is your item. You cannot add it to the cart. {/* Message for the user's own item */}
+                            </div>
+                        ) : (
+                            <div className='itemid-myitem'>
+                                Please log in to add items to your cart. {/* Message for non-logged in users */}
+                            </div>
+                        )
+                    )}
+                    {/* <Cart itemId={itemId} /> */}
                 </div>
             </div>
             <div className="reviews-container">
@@ -118,37 +134,39 @@ const ItemDetails = () => {
                         </div>
                     </div>
                 ))}
-                {user && !hasReviewed && user.id !== item.user.id && (
-                    <OpenModalButton
-                        modalComponent={<CreateReview closeModal={handleCloseModal} itemId={itemId} className="write-review" />}
-                        buttonText="Write a Review"
-                    />
-                )}
-                {user && hasReviewed && (
-                    <div>
+                <div className='id-reviewbutton-container'>
+                    {user && !hasReviewed && user.id !== item.user.id && (
                         <OpenModalButton
-                            modalComponent={
-                                <UpdateReview
-                                    closeModal={handleCloseModal}
-                                    itemId={itemId}
-                                    reviewId={reviews.find((review) => review.user_id === user.id)?.id}
-                                />
-                            }
-                            buttonText="Edit a Review"
+                            modalComponent={<CreateReview closeModal={handleCloseModal} itemId={itemId} className="write-review" />}
+                            buttonText="Write a Review"
                         />
-                        <OpenModalButton
-                            modalComponent={
-                                <DeleteReview
-                                    closeModal={handleCloseModal}
-                                    itemId={itemId}
-                                    reviewId={reviews.find((review) => review.user_id === user.id)?.id}
-                                    onDelete={handleReviewDelete}
-                                />
-                            }
-                            buttonText={"Delete Review"}
-                        />
-                    </div>
-                )}
+                    )}
+                    {user && hasReviewed && (
+                        <div>
+                            <OpenModalButton
+                                modalComponent={
+                                    <UpdateReview
+                                        closeModal={handleCloseModal}
+                                        itemId={itemId}
+                                        reviewId={reviews.find((review) => review.user_id === user.id)?.id}
+                                    />
+                                }
+                                buttonText="Edit a Review"
+                            />
+                            <DeleteOpenModalButton
+                                modalComponent={
+                                    <DeleteReview
+                                        closeModal={handleCloseModal}
+                                        itemId={itemId}
+                                        reviewId={reviews.find((review) => review.user_id === user.id)?.id}
+                                        onDelete={handleReviewDelete}
+                                    />
+                                }
+                                buttonText={"Delete Review"}
+                            />
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );
