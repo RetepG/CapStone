@@ -11,6 +11,7 @@ import CreateItem from "./components/CreateItem";
 import UpdateItem from "./components/UpdateItems";
 import MyPage from "./components/MyPage";
 import UserCart from "./components/Cart/UserCart";
+import BadPage404 from "./components/404Page";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App() {
           <Route exact path="/">
             <LandingPage />
           </Route>
+          <BadPage404></BadPage404>
         </Switch>
       )}
     </>
