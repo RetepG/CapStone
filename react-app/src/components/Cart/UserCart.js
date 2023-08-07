@@ -42,20 +42,12 @@ function UserCart() {
     }, [cartArray, prevCartArray]);
 
     const handleUpdateCart = async (itemId) => {
-        const quantity = quantityMap[itemId];
+        const quantity = parseInt(quantityMap[itemId], 10); // Convert the quantity to an integer
 
-        if (!Number.isInteger(Number(quantity))) {
+        if (isNaN(quantity) || quantity <= 0) {
             setErrorMessageMap((prevMap) => ({
                 ...prevMap,
-                [itemId]: "Please enter a valid quantity.",
-            }));
-            return;
-        }
-
-        if (quantity <= 0) {
-            setErrorMessageMap((prevMap) => ({
-                ...prevMap,
-                [itemId]: "Please enter a positive quantity.",
+                [itemId]: "Please enter a valid positive quantity.",
             }));
             return;
         }
@@ -65,19 +57,22 @@ function UserCart() {
             quantity,
         };
 
-        await dispatch(updateCartThunk(updatedCart));
-        await dispatch(getUserCartThunk());
+        try {
+            // Dispatch the updateCartThunk and handle the response in the thunk
+            await dispatch(updateCartThunk(itemId, updatedCart));
+            await dispatch(getUserCartThunk());
+        } catch (error) {
+            // Handle any errors here if needed
+        }
     };
+
+
 
     const removeOne = async (itemId) => {
         await dispatch(removeOneThunk(itemId));
         dispatch(getAllItemThunk());
     };
 
-    // const purchase = async () => {
-    //     setIsPurchase(true);
-    //     await dispatch(removeAllThunk());
-    // };
     const purchase = async () => {
         setIsPurchase(true);
         await dispatch(removeAllThunk());
@@ -146,8 +141,9 @@ function UserCart() {
                                             <p className="User-Cart-Price">$ {item.price}</p>
                                         </div>
                                     </NavLink>
-                                    {/* Quantity:{" "} */}
-                                    {/* <input
+                                    {/** */}
+                                    Quantity:{" "}
+                                    <input
                                         className="quantitySelector"
                                         type="number"
                                         onChange={(e) =>
@@ -157,12 +153,12 @@ function UserCart() {
                                             }))
                                         }
                                         value={quantityMap[cart.item_id] || cart.quantity}
-                                    ></input> */}
+                                    ></input>
                                     <div>Quantity: {cart.quantity}</div>
                                     <div className="update-remove">
-                                        {/* <button className="updateCartButton" onClick={() => handleUpdateCart(item.id)}>
+                                        <button className="updateCartButton" onClick={() => handleUpdateCart(item.id)}>
                                             Update
-                                        </button> */}
+                                        </button>
                                         <button className="removeCartButton" onClick={() => removeOne(item.id)}>
                                             Remove
                                         </button>

@@ -54,23 +54,48 @@ def add_to_cart():
 
 
 # Changes the amount of quantity for item
-@cart_routes.route('/items/<int:itemId>', methods=['PUT'])
+@cart_routes.route('/add-to-cart/<int:itemId>', methods=['PUT'])
 @login_required
+# def update_cart(itemId):
+#     userId = session.get('_user_id')
+#     cart = Cart.query.filter(Cart.item_id == itemId).filter(Cart.user_id == str(userId)).first()
+
+#     form = CartForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+
+#     if form.validate_on_submit():
+#         if form.data['quantity']:
+#             cart.quantity = form.data['quantity']
+#         db.session.commit()
+#         return cart.to_dict()
+
+#     else :
+#         return jsonify({"error": "Cannot update the cart"})
 def update_cart(itemId):
     userId = session.get('_user_id')
     cart = Cart.query.filter(Cart.item_id == itemId).filter(Cart.user_id == str(userId)).first()
 
-    form = CartForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+    if not cart:
+        return jsonify({"error": "Cart not found"}), 404
 
-    if form.validate_on_submit():
-        if form.data['quantity']:
-            cart.quantity = form.data['quantity']
+    data = request.json  # Parse the JSON payload from the request
+
+    if not data:
+        return jsonify({"error": "Invalid data"}), 400
+
+    quantity = data.get('quantity')
+
+    if quantity is None or not isinstance(quantity, int) or quantity <= 0:
+        return jsonify({"error": "Invalid quantity"}), 400
+
+    cart.quantity = quantity
+
+    try:
         db.session.commit()
         return cart.to_dict()
-
-    else :
-        return jsonify({"error": "Cannot update the cart"})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": "Failed to update the cart"}), 500
 
 # Remove 1 item from cart
 @cart_routes.route('/items/<int:itemId>', methods=['DELETE'])
