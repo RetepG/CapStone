@@ -165,14 +165,14 @@
     }
 
     .default-image {
-        width: 65rem;
-        height: 62rem;
+        width: 50rem;
+        height: 50rem;
     }
 
     .small-img {
-        height: 15rem;
-        width: 15rem;
-        padding-left: 10rem;
+        height: 12rem;
+        width: 12rem;
+        margin-left: 10rem;
         border-radius: 10px;
         /* border: solid black 3px */
     }
@@ -182,13 +182,13 @@
     }
 
     .Info {
-        padding-right: 10rem;
-        padding-left: 3rem;
+        margin-right: 10rem;
+        margin-left: 3rem;
     }
 
     .name {
         padding-top: 6rem;
-        font-size: 4rem;
+        font-size: 3rem;
         font-weight: 800;
     }
 
@@ -201,7 +201,7 @@
 
     .price {
         padding-top: 2rem;
-        font-size: 2.5rem;
+        font-size: 2rem;
         font-weight: 800;
     }
 
@@ -222,34 +222,16 @@
     }
 
     .background-color {
-        background-color: white;
+        /* background-color: white;
         min-height: 100vh;
-        height: 100%;
+        height: 100%; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 65%;
+        margin: 0 auto;
     }
 
-    /* .reviews-container {
-        margin-top: 3rem;
-        border-top: 1px solid;
-    }
-
-    .reviews-title {
-        margin-left: 10rem;
-        margin-top: 1rem;
-        font-size: 2.5rem;
-        font-weight: 800;
-    }
-
-    .review-text {
-        padding-left: 10rem;
-        font-size: 1.3rem;
-        margin-top: 1rem;
-    }
-
-    .review-star {
-        padding-left: 10rem;
-        font-size: 1.5rem;
-        margin-top: 0.5rem;
-    } */
     .reviews-container {
         margin-top: 3rem;
         border-top: 1px solid;
@@ -259,14 +241,14 @@
     }
 
     .reviews-title {
-        margin-left: 10rem;
+        margin-left: 5.5rem;
         margin-top: 1rem;
         font-size: 2.5rem;
         font-weight: 800;
     }
 
     .review-texts {
-        padding-left: 10rem;
+        padding-left: 5.5rem;
         font-size: 1.3rem;
         margin-top: 1rem;
         max-height: 300px;
@@ -281,7 +263,7 @@
     }
 
     .id-reviewbutton-container {
-        margin-left: 10rem;
+        margin-left: 5.5rem;
         margin-top: 1rem;
     }
 

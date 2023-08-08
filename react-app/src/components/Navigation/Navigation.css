@@ -10,13 +10,17 @@
 .Nav-container {
   border-bottom: solid #ddd 2px;
   height: 3.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 65%;
+  margin: 0 auto;
 }
 
 .Home {
   font-size: 3rem;
-  margin-left: 1rem;
   text-decoration: none;
-  color: black;
+  color: #F1641E;
   font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
@@ -92,15 +96,15 @@
 .profile-dropdown {
   border: grey solid 2px;
   background: white;
-  text-align: start;
+  text-align: end;
   color: black;
   font-size: 1.2rem;
-  width: 100%;
+  width: 10rem;
   max-width: 12rem;
   padding: 0.3rem;
   border-radius: 0.5rem;
   text-decoration: none;
-  margin-right: 5rem;
+  margin-right: 22rem;
   margin-top: .2rem;
   position: absolute;
   right: 0;
