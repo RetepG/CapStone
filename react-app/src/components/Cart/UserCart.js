@@ -173,8 +173,8 @@ function UserCart() {
                 )}
             </div>
             <div className="purchase-container">
+                <p className="totalPrice">Item(s) total ${`${getTotalPrice()}`}</p>
                 <p className="totalItems">Total Items: {`(${cartArray.length} items)`}</p>
-                <p className="totalPrice">Cart Total: ${`${getTotalPrice()}`}</p>
                 <div className="purchaseButtonContainer">
                     {cartArray.length > 0 && (
                         <button className="purchaseButton" onClick={purchase}>

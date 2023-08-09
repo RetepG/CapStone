@@ -74,6 +74,10 @@
         margin: 5px;
     }
 
+    .totalItems{
+        border-bottom: solid lightgray 1px;
+    }
+
     .purchaseButtonContainer {
         display: flex;
         justify-content: flex-end;
@@ -82,11 +86,11 @@
     .purchaseButton {
         margin-top: 10px;
         /* width: 5rem; */
-        width: 7rem;
+        width: 20rem;
         height: 2.5rem;
         background-color: black;
         color: white;
-        border-radius: 5px;
+        border-radius: 10px;
     }
 
     .purchaseButton:hover {

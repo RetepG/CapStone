@@ -84,7 +84,7 @@
     max-height: 20rem;
     object-fit: cover;
     border-radius: 15px;
-    border: solid 3px black;
+    border: solid 2px lightgray;
 }
 
 .price-landing {
