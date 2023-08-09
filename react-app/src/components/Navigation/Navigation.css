@@ -85,7 +85,7 @@
 .Profile-button {
   border: none;
   font-size: 2.5rem;
-  padding-right: 3rem;
+  margin-right: 3rem;
   background-color: white;
 }
 
@@ -99,12 +99,12 @@
   text-align: end;
   color: black;
   font-size: 1.2rem;
-  width: 10rem;
+  width: 15rem;
   max-width: 12rem;
   padding: 0.3rem;
   border-radius: 0.5rem;
   text-decoration: none;
-  margin-right: 22rem;
+  margin-right: 30rem;
   margin-top: .2rem;
   position: absolute;
   right: 0;

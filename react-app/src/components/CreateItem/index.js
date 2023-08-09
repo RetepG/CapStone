@@ -28,9 +28,11 @@ function CreateItem() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        const charCount = value.length;
         setFormValues(prevState => ({
             ...prevState,
-            [name]: value
+            [name]: value,
+            charCount,
         }));
     };
 
@@ -63,8 +65,8 @@ function CreateItem() {
 
         if (description.trim().length === 0) {
             errorObj.description = "Description is required";
-        } else if (description.length > 150) {
-            errorObj.description = "Description must be at most 150 characters";
+        } else if (description.length > 350) {
+            errorObj.description = "Description must be at most 350 characters";
         }
 
         if (!mainimage) {
@@ -138,7 +140,7 @@ function CreateItem() {
                     {error.price && <p className="error-message">{error.price}</p>}
                 </label>
                 <label>
-                    <div>Description</div>
+                    <div>Description (Max 350 Characters)</div>
                     <textarea
                         rows={10}
                         className="item_description"
@@ -148,6 +150,9 @@ function CreateItem() {
                         placeholder="Item Description"
                         onChange={handleChange}
                     />
+                    <div className="char-counter">
+                        {formValues.charCount}/350 characters
+                    </div>
                     {error.description && <p className="error-message">{error.description}</p>}
                 </label>
                 <div className="img_upload_area">

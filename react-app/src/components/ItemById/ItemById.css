@@ -235,6 +235,7 @@
     .reviews-container {
         margin-top: 3rem;
         border-top: 1px solid;
+        width: 100%;
         /* Add fixed height and scroll overflow for reviews container */
         height: 600px;
         overflow-y: auto;
