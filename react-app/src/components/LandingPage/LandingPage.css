@@ -17,7 +17,6 @@
 }
 
 .Featured-Items-Container {
-    /* background-color: peachpuff; */
     border-radius: 5px;
     margin-bottom: 20px;
     padding-top: 5px;
@@ -41,20 +40,13 @@
     width: 18.5%;
     height: 27rem;
     margin-bottom: 20px;
+    transition: transform 0.3s;
 }
 
 .Featured-Items-List li:hover {
-    box-shadow: 1px 2px 15px 5px gray;
+    transform: scale(1.1);
 }
 
-
-/* .All-Items-List {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 20px;
-    list-style: none;
-    padding: 0;
-} */
 .All-Items-List {
     display: flex;
     flex-wrap: wrap;
@@ -66,11 +58,14 @@
 }
 
 .All-Items-List li {
-    /* padding-top: 5px;
-    margin-bottom: 20px; */
     width: 18.5%;
     height: 27rem;
     margin-bottom: 20px;
+    transition: transform 0.3s;
+}
+
+.All-Items-List li:hover {
+    transform: scale(1.1);
 }
 
 .All-Items-List li a {

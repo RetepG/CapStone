@@ -154,7 +154,7 @@ function UserCart() {
                                         }
                                         value={quantityMap[cart.item_id] || cart.quantity}
                                     ></input>
-                                    <div>Quantity: {cart.quantity}</div>
+                                    {/* <div>Quantity: {cart.quantity}</div> */}
                                     <div className="update-remove">
                                         <button className="updateCartButton" onClick={() => handleUpdateCart(item.id)}>
                                             Update

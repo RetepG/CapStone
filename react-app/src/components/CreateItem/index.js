@@ -26,15 +26,32 @@ function CreateItem() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState({});
 
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     const charCount = value.length;
+    //     setFormValues(prevState => ({
+    //         ...prevState,
+    //         [name]: value,
+    //         charCount,
+    //     }));
+    // };
     const handleChange = (e) => {
         const { name, value } = e.target;
-        const charCount = value.length;
-        setFormValues(prevState => ({
-            ...prevState,
-            [name]: value,
-            charCount,
-        }));
+        if (name === "description") {
+            const charCount = value.length;
+            setFormValues(prevState => ({
+                ...prevState,
+                [name]: value,
+                charCount,
+            }));
+        } else {
+            setFormValues(prevState => ({
+                ...prevState,
+                [name]: value,
+            }));
+        }
     };
+
 
     const handleAddImage = (name, e) => {
         const file = e.target.files[0];
@@ -54,8 +71,8 @@ function CreateItem() {
 
         if (name.trim().length === 0) {
             errorObj.name = "Name is required";
-        } else if (name.length < 2 || name.length > 30) {
-            errorObj.name = "Name must be between 2 and 30 characters";
+        } else if (name.length < 2 || name.length > 25) {
+            errorObj.name = "Name must be between 2 and 25 characters";
         }
 
         const parsedPrice = parseFloat(price);
