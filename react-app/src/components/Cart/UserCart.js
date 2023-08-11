@@ -154,7 +154,7 @@ function UserCart() {
                                         }
                                         value={quantityMap[cart.item_id] || cart.quantity}
                                     ></input>
-                                    <div>Quantity: {cart.quantity}</div>
+                                    {/* <div>Quantity: {cart.quantity}</div> */}
                                     <div className="update-remove">
                                         <button className="updateCartButton" onClick={() => handleUpdateCart(item.id)}>
                                             Update
@@ -173,8 +173,8 @@ function UserCart() {
                 )}
             </div>
             <div className="purchase-container">
+                <p className="totalPrice">Item(s) total ${`${getTotalPrice()}`}</p>
                 <p className="totalItems">Total Items: {`(${cartArray.length} items)`}</p>
-                <p className="totalPrice">Cart Total: ${`${getTotalPrice()}`}</p>
                 <div className="purchaseButtonContainer">
                     {cartArray.length > 0 && (
                         <button className="purchaseButton" onClick={purchase}>

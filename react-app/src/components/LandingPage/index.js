@@ -33,7 +33,7 @@ function LandingPage() {
     return (
         <div className="landing-page-whole">
             <h1 className="Greeting">
-                {user ? `Welcome back, ${user.username}!` : "Welcome to PawCo"}
+                {user ? `Welcome back, ${user.username}!` : "Welcome to PawCo!"}
             </h1>
             <div className="Landing-Page-Container">
                 {featuredItems.length > 0 ? (

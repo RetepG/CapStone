@@ -1,6 +1,15 @@
+@media (max-width: 1999px){
 .MyPage-title,
 .MyPage-items {
     text-align: center;
+}
+
+.mypage-whole{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 65%;
+    margin: 0 auto;
 }
 
 .MyPage-wrapper {
@@ -20,10 +29,15 @@
 }
 
 .MyPage-mainimage {
-    width: 25rem;
-    height: 25rem;
-    border: 3px solid black;
+    width: 17rem;
+    height: 17rem;
+    border: solid 2px lightgray;
     border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.MyPage-mainimage:hover {
+    transform: scale(1.05);
 }
 
 .Mypage-buttons {
@@ -56,3 +70,80 @@
 .MyPage-name{
     text-decoration: none;
 }
+
+}
+
+@media (min-width: 2000px){
+    .MyPage-title,
+    .MyPage-items {
+        text-align: center;
+    }
+
+    .mypage-whole{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 65%;
+        margin: 0 auto;
+    }
+
+    .MyPage-wrapper {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 20px;
+        justify-content: center;
+    }
+
+    .MyPage-item-container {
+        width: 100%;
+    }
+
+    .MyPage-mainimage-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .MyPage-mainimage {
+        width: 23rem;
+        height: 23rem;
+        border: 3px solid black;
+        border-radius: 10px;
+        transition: transform 0.3s;
+    }
+
+    .MyPage-mainimage:hover {
+        transform: scale(1.05);
+    }
+
+    .Mypage-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .Mypage-update-item,
+    .Mypage-delete-item {
+        padding: 8px 16px;
+        font-size: 14px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+    }
+
+    .Mypage-update-item:hover,
+    .Mypage-delete-item:hover {
+        background-color: #0056b3;
+    }
+
+    .Mypage-delete-item {
+        margin-left: 10px;
+    }
+
+    .MyPage-name{
+        text-decoration: none;
+    }
+
+    }

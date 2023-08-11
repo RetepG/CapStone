@@ -1,3 +1,4 @@
+@media (max-width: 1999px) {
 .hidden {
   display: none;
   position: absolute;
@@ -10,13 +11,17 @@
 .Nav-container {
   border-bottom: solid #ddd 2px;
   height: 3.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 65%;
+  margin: 0 auto;
 }
 
 .Home {
   font-size: 3rem;
-  margin-left: 1rem;
   text-decoration: none;
-  color: black;
+  color: #F1641E;
   font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
@@ -81,7 +86,7 @@
 .Profile-button {
   border: none;
   font-size: 2.5rem;
-  padding-right: 3rem;
+  margin-right: 3rem;
   background-color: white;
 }
 
@@ -92,15 +97,15 @@
 .profile-dropdown {
   border: grey solid 2px;
   background: white;
-  text-align: start;
+  text-align: end;
   color: black;
   font-size: 1.2rem;
-  width: 100%;
+  width: 15rem;
   max-width: 12rem;
   padding: 0.3rem;
   border-radius: 0.5rem;
   text-decoration: none;
-  margin-right: 5rem;
+  margin-right: 22rem;
   margin-top: .2rem;
   position: absolute;
   right: 0;
@@ -117,3 +122,132 @@
   width: 2.6rem;
   height: 2.6rem;
 }
+
+}
+
+@media (min-width: 2000px) {
+  .hidden {
+    display: none;
+    position: absolute;
+  }
+
+  * {
+    font-family: Roboto, Helvetica Neue, sans-serif
+  }
+
+  .Nav-container {
+    border-bottom: solid #ddd 2px;
+    height: 3.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 65%;
+    margin: 0 auto;
+  }
+
+  .Home {
+    font-size: 3rem;
+    text-decoration: none;
+    color: #F1641E;
+    font-family: Roboto, Helvetica Neue, sans-serif;
+  }
+
+
+  .Nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    list-style: none;
+  }
+
+  .Logo {
+    padding-top: 0.2rem;
+    height: 3rem;
+    width: 3rem;
+    margin-left: 5rem;
+  }
+
+  .Nav-Cart {
+    width: 5rem;
+    height: 2.5rem;
+    margin-left: 1.5rem;
+    margin-right: 2rem;
+  }
+
+  .Create-Link {
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: black;
+  }
+
+  .Create-words {
+    text-decoration: none;
+    font-size: 1rem
+  }
+
+  .Top-left-nav {
+    display: flex;
+    justify-content: center;
+    width: 20%;
+  }
+
+  .filler {
+    width: 30%
+  }
+
+  .nav-width {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    justify-content: flex-end;
+    padding-top: 5px;
+  }
+
+  .New-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Profile-button {
+    border: none;
+    font-size: 2.5rem;
+    margin-right: 3rem;
+    background-color: white;
+  }
+
+  .Profile-button:hover{
+    cursor: pointer;
+  }
+
+  .profile-dropdown {
+    border: grey solid 2px;
+    background: white;
+    text-align: end;
+    color: black;
+    font-size: 1.2rem;
+    width: 15rem;
+    max-width: 12rem;
+    padding: 0.3rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    margin-right: 30rem;
+    margin-top: .2rem;
+    position: absolute;
+    right: 0;
+    list-style: none;
+    font-family: Roboto, Helvetica Neue, sans-serif;
+  }
+
+  .Nav-square {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .about-me{
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+
+  }
