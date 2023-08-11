@@ -17,7 +17,13 @@ function UpdateReview({ reviewId, itemId }) {
 
     const [review, setReview] = useState("");
     const [star, setstar] = useState(0);
+    const [remainingCharacters, setRemainingCharacters] = useState(300);
     const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const charactersLeft = 300 - review.length;
+        setRemainingCharacters(charactersLeft);
+    }, [review]);
 
     useEffect(() => {
         dispatch(getReviewThunk(reviewId)).then(() => setIsLoading(false));
@@ -76,6 +82,9 @@ function UpdateReview({ reviewId, itemId }) {
                         required
                     />
                 </label>
+                <div className="character-counter">
+                    {remainingCharacters} characters remaining
+                </div>
                 <label className="rating">
                     {star > 0 ?
                         <i className="fas fa-star" onClick={() => setstar(1)}></i>

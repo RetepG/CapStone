@@ -36,12 +36,27 @@ export const addCartThunk = (itemId, total) => async (dispatch) => {
 //         await dispatch(getUserCartThunk())
 //     }
 // }
-export const updateCartThunk = (updatedCart) => async (dispatch) => {
-    const res = await fetch(`/carts/add-to-cart`, { method: "PUT", body: JSON.stringify(updatedCart) })
-    if (res.ok) {
-        await dispatch(getUserCartThunk())
+export const updateCartThunk = (itemId, updatedCart) => async (dispatch) => {
+    try {
+        const res = await fetch(`/carts/add-to-cart/${itemId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedCart),
+        });
+
+        if (res.ok) {
+            await dispatch(getUserCartThunk());
+        } else {
+            // Handle the error if needed
+        }
+    } catch (error) {
+        // Handle any network or other errors
     }
-}
+};
+
+
 
 export const removeOneThunk = (itemId) => async (dispatch) => {
     const res = await fetch(`/carts/items/${itemId}`, { method: "DELETE" })

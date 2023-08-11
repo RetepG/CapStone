@@ -23,7 +23,7 @@ const MyPage = () => {
     const myitems = Object.values(items).filter((item) => item.user.id === user.id);
 
     return (
-        <>
+        <div className="mypage-whole">
             <h1 className="MyPage-title">My Store</h1>
             <h2 className="MyPage-items">Items</h2>
             <div className="MyPage-wrapper">
@@ -48,7 +48,7 @@ const MyPage = () => {
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     );
 };
 
