@@ -104,3 +104,22 @@
     color: black;
     font-weight: bold;
 }
+
+/* added */
+.Search-Input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.Search-Suggestions {
+    list-style: none;
+    padding: 0;
+}
+
+.Search-Suggestions li {
+    margin: 10px 0;
+}

@@ -141,6 +141,7 @@ function LandingPage() {
                         setSearchQuery(e.target.value);
                         handleSearch(e.target.value);
                     }}
+                    className="Search-Input"
                 />
                 {searchResults.length > 0 && (
                     <ul className="Search-Suggestions">
